@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/myhand_nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.myhand.nationalassembly.ui.view.MainFragment"
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_memberSearchFragment"
+            app:destination="@id/memberSearchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_billFragment"
+            app:destination="@id/billFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberSearchFragment"
+        android:name="com.myhand.nationalassembly.ui.view.member.MemberSearchFragment"
+        android:label="MemberSearchFragment" />
+    <fragment
+        android:id="@+id/billFragment"
+        android:name="com.myhand.nationalassembly.ui.view.bill.BillFragment"
+        android:label="BillFragment" />
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.myhand.nationalassembly.ui.view.schedule.ScheduleFragment"
+        android:label="ScheduleFragment" />
+</navigation>

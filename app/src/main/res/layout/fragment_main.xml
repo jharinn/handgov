@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_grey"
+        android:padding="@dimen/main_screen_padding"
+        tools:context=".ui.view.MainFragment">
+
+        <Button
+            android:id="@+id/btn_member"
+            style="@style/MainButtons"
+            android:text="@string/history_members"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_bill"
+            style="@style/MainButtons"
+            android:text="@string/bill_activity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_schedule"
+            style="@style/MainButtons"
+            android:text="@string/schedule"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_member" />
+
+        <Button
+            android:id="@+id/btn_report"
+            style="@style/MainButtons"
+            android:text="@string/recent_bill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_bill" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
