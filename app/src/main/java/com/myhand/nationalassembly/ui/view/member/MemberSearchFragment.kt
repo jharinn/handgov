@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.myhand.nationalassembly.R
 import com.myhand.nationalassembly.databinding.FragmentMemberSearchBinding
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberSearchPagingAdapter
 import com.myhand.nationalassembly.ui.viewmodel.MemberViewModel
@@ -19,8 +22,9 @@ import com.myhand.nationalassembly.util.collectLatestStateFlow
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+
 @AndroidEntryPoint
-class MemberSearchFragment : Fragment() {
+class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnClickListener {
     private var _binding: FragmentMemberSearchBinding? = null
     private val binding get() = _binding!!
 
@@ -38,6 +42,8 @@ class MemberSearchFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setSearchBtn()
+        setSpinner()
         validatePhotoData()
         observeLiveData()
         setUpRecyclerView()
@@ -47,7 +53,13 @@ class MemberSearchFragment : Fragment() {
 
     private fun setDefaultSearch() {
         LogUtill.d("setDefaultSearch")
-        memberVM.fetchMemberPaging("")
+        memberVM.fetchMemberPaging(
+            numOfRows = null,
+            pageNo = null,
+            name = null,
+            origName = null,
+            partyName = null,
+        )
 
         collectLatestStateFlow(memberVM.fetchMemberResult) {
             memberSearchAdapter.submitData(it)
@@ -58,7 +70,7 @@ class MemberSearchFragment : Fragment() {
 
     private fun observeLiveData() {
         memberVM.memberPhotoDBData.observe(viewLifecycleOwner, Observer { photoData ->
-            LogUtill.d("memberVM.memberPhotoDBData.observe")
+            LogUtill.d("memberVM.memberPhotoDBData.observe photoData.size::${photoData.size}")
 
             if (photoData.size > 0) {
                 setDefaultSearch()
@@ -70,29 +82,31 @@ class MemberSearchFragment : Fragment() {
      * 검색창으로 데이터 검색
      */
     private fun searchMembers() {
-        var startTime = System.currentTimeMillis()
-        var endTime: Long
+        var selectedLocation = ""
+        var selectedParty = ""
 
-        binding.etMemberSearch.addTextChangedListener { text ->
-            endTime = System.currentTimeMillis()
-            if (endTime - startTime >= Const.SEARCH_BOOKS_TIME_DELAY) {
-                text?.let {
-                    val query = text.toString().trim()
-                    if (query.isNotEmpty()) {
-                        memberVM.fetchMemberPaging(query)
-                        //memberViewModel.query = query
-                    }
-                }
-            }
-            startTime = endTime
+        selectedLocation = binding.spinnerLocation.selectedItem.toString()
+        selectedParty = binding.spinnerParty.selectedItem.toString()
+        LogUtill.d("selectedLocation: $selectedLocation")
+
+        binding.etMemberSearch.text?.let { text ->
+            val name = if (text.toString().trim().isEmpty()) "" else text.toString().trim()
+            memberVM.fetchMemberPaging(
+                numOfRows = null,
+                pageNo = null,
+                name = name,
+                origName = selectedLocation,
+                partyName = selectedParty,
+            )
         }
+    }
+
+    private fun setSearchBtn() {
+        binding.ibSearchBtn.setOnClickListener(this)
     }
 
     private fun setUpRecyclerView() {
         memberSearchAdapter = MemberSearchPagingAdapter()
-
-//        binding.etSearch.text =
-//            Editable.Factory.getInstance().newEditable(searchViewModel.query)
 
         binding.rvMemberSearch.apply {
             setHasFixedSize(true)
@@ -106,10 +120,37 @@ class MemberSearchFragment : Fragment() {
             )
             adapter = memberSearchAdapter
         }
-//        bookSearchAdapter.setOnItemClickListener {
-//            val action = SearchFragmentDirections.actionFragmentSearchToFragmentBook(it)
-//            findNavController().navigate(action)
-//        }
+        memberSearchAdapter.setOnItemClickListener {
+            val action =
+                MemberSearchFragmentDirections.actionMemberSearchFragmentToMemberDetailFragment(it)
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun setSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.location_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            binding.spinnerLocation.adapter = adapter
+        }
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.party_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            binding.spinnerParty.adapter = adapter
+        }
+
+        binding.spinnerLocation.onItemSelectedListener = this
+        binding.spinnerParty.onItemSelectedListener = this
     }
 
     private fun isPhotoDatabaseExist(dbName: String): Boolean {
@@ -149,5 +190,21 @@ class MemberSearchFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.ib_search_btn -> {
+                searchMembers()
+            }
+        }
     }
 }

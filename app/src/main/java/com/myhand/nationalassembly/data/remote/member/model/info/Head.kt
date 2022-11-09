@@ -11,11 +11,3 @@ data class Head(
     @Element(name = "RESULT")
     val result: Result,
 )
-
-@Xml(name = "RESULT")
-data class Result(
-    @PropertyElement(name = "CODE")
-    val code: String?,
-    @PropertyElement(name = "MESSAGE")
-    val message: String?,
-)

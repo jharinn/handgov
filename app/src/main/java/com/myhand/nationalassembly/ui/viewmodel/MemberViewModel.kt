@@ -38,16 +38,27 @@ class MemberViewModel @Inject constructor(
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
 
-    fun fetchMemberPaging(query: String) {
+    fun fetchMemberPaging(
+        numOfRows: Int? = 10,
+        pageNo: Int? = 1,
+        name: String?,
+        partyName: String?,
+        origName: String?,
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            memberRepository.searchMember()
+            memberRepository.searchMember(
+                numOfRows,
+                pageNo,
+                name,
+                partyName,
+                origName,
+            )
                 .cachedIn(viewModelScope)
                 .map {
                     it.map { member ->
                         for (photo in memberPhotoDBData.value!!) {
                             if (member.name == photo.empNm && member.oriLocalName == photo.origNm) {
                                 member.photoLink = photo.jpgLink
-                                LogUtill.d("photoDataList.forEach { :: ${member.photoLink}")
                             }
                         }
                         member
@@ -57,7 +68,7 @@ class MemberViewModel @Inject constructor(
                     _fetchMemberResult.value = it
                 }
 
-            LogUtill.d("fetchMemberPaging query: $query")
+            LogUtill.d("fetchMemberPaging name: $name, partyName: $partyName,origName: $origName")
         }
     }
 

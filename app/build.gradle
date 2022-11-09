@@ -70,6 +70,12 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
     // Xml
+    implementation('com.squareup.retrofit2:converter-simplexml:2.9.0') {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
+
     def tikxml_version = "0.8.13"
     implementation "com.tickaroo.tikxml:retrofit-converter:$tikxml_version"
     implementation "com.tickaroo.tikxml:annotation:$tikxml_version"
@@ -149,4 +155,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
+    //viewpager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 }

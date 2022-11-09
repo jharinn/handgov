@@ -1,7 +1,9 @@
 package com.myhand.nationalassembly.ui.view.member.adapter
 
-import com.tickaroo.tikxml.annotation.PropertyElement
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class MemberInfoItem(
     /** 강기윤 */
     val name: String?,
@@ -10,7 +12,7 @@ data class MemberInfoItem(
     /** KANG GIYUN */
     val engName: String?,
     /** 음 */
-    val BthName: String?,
+    val bthName: String?,
     /** 1960-06-04 */
     val bthDate: String?,
     /** 간사 */
@@ -44,10 +46,9 @@ data class MemberInfoItem(
     /** 14M56632 */
     val monaCode: String?,
     /** <![CDATA[ [학력] 마산공고(26회) 창원대학교 행정학과 */
-    @PropertyElement(name = "MEM_TITLE")
     val memTitle: String?,
     /** 의원회관 937호 */
     val assemAddress: String?,
     /** 사진 링크 */
     var photoLink: String?
-)
+) : Parcelable

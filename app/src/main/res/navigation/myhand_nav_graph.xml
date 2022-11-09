@@ -2,32 +2,44 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/myhand_nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/fragment_main">
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/fragment_main"
         android:name="com.myhand.nationalassembly.ui.view.MainFragment"
         android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_memberSearchFragment"
-            app:destination="@id/memberSearchFragment" />
+            app:destination="@id/fragment_member" />
         <action
             android:id="@+id/action_mainFragment_to_billFragment"
-            app:destination="@id/billFragment" />
+            app:destination="@id/fragment_bill" />
         <action
             android:id="@+id/action_mainFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
+            app:destination="@id/fragment_schedule" />
     </fragment>
     <fragment
-        android:id="@+id/memberSearchFragment"
+        android:id="@+id/fragment_member"
         android:name="com.myhand.nationalassembly.ui.view.member.MemberSearchFragment"
-        android:label="MemberSearchFragment" />
+        android:label="MemberSearchFragment">
+        <action
+            android:id="@+id/action_memberSearchFragment_to_memberDetailFragment"
+            app:destination="@id/fragment_member_detail" />
+    </fragment>
     <fragment
-        android:id="@+id/billFragment"
+        android:id="@+id/fragment_bill"
         android:name="com.myhand.nationalassembly.ui.view.bill.BillFragment"
         android:label="BillFragment" />
     <fragment
-        android:id="@+id/scheduleFragment"
+        android:id="@+id/fragment_schedule"
         android:name="com.myhand.nationalassembly.ui.view.schedule.ScheduleFragment"
         android:label="ScheduleFragment" />
+    <fragment
+        android:id="@+id/fragment_member_detail"
+        android:name="com.myhand.nationalassembly.ui.view.member.MemberDetailFragment"
+        android:label="MemberDetailFragment">
+        <argument
+            android:name="memberDetailInfo"
+            app:argType="com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem" />
+    </fragment>
 </navigation>

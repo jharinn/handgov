@@ -17,8 +17,20 @@ class MemberRepositoryImpl @Inject constructor(
     private val remoteDataSource: MemberRemoteDataSource
 ) : MemberRepository {
 
-    override fun searchMember(numOfRows: Int?, pageNo: Int?): Flow<PagingData<MemberInfoItem>> {
-        return remoteDataSource.searchMemberPaging()
+    override fun searchMember(
+        numOfRows: Int?,
+        pageNo: Int?,
+        name: String?,
+        partyName: String?,
+        origName: String?,
+    ): Flow<PagingData<MemberInfoItem>> {
+        return remoteDataSource.searchMemberPaging(
+            numOfRows,
+            pageNo,
+            name,
+            partyName,
+            origName,
+        )
     }
 
     override suspend fun insertAllMemberPhoto(vararg memberPhotos: MemberPhotoModel) {

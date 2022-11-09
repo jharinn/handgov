@@ -9,7 +9,13 @@ import retrofit2.Response
 
 interface MemberRepository {
 
-    fun searchMember(numOfRows: Int? = 10, pageNo: Int? = 1): Flow<PagingData<MemberInfoItem>>
+    fun searchMember(
+        numOfRows: Int? = 10,
+        pageNo: Int? = 1,
+        name: String?,
+        partyName: String?,
+        origName: String?,
+    ): Flow<PagingData<MemberInfoItem>>
 
     suspend fun insertAllMemberPhoto(vararg item: MemberPhotoModel)
 

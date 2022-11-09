@@ -21,9 +21,21 @@ class MemberRemoteDataSource @Inject constructor(
 ) {
     fun searchMemberPaging(
         numOfRows: Int? = 10,
-        pageNo: Int? = 1
+        pageNo: Int? = 1,
+        name: String?,
+        partyName: String?,
+        origName: String?,
     ): Flow<PagingData<MemberInfoItem>> {
-        val pagingSourceFactory = { MemberSearchPagingSource(memberInfoApi) }
+        val pagingSourceFactory = {
+            MemberSearchPagingSource(
+                memberInfoApi,
+                numOfRows,
+                pageNo,
+                name,
+                partyName,
+                origName
+            )
+        }
 
         return Pager(
             config = PagingConfig(

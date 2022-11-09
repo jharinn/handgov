@@ -16,7 +16,7 @@ data class MemberInfoRow(
     val engName: String?,
     /** 음 */
     @PropertyElement(name = "BTH_GBN_NM")
-    val BthName: String?,
+    val bthName: String?,
     /** 1960-06-04 */
     @PropertyElement(name = "BTH_DATE")
     val bthDate: String?,
@@ -39,7 +39,7 @@ data class MemberInfoRow(
     @PropertyElement(name = "REELE_GBN_NM")
     val reElected: String?,
     /**  제19대, 제21대 */
-    @PropertyElement(name = "UNIT")
+    @PropertyElement(name = "UNITS")
     val unit: String?,
     /** 남 */
     @PropertyElement(name = "SEX_GBN_NM")

@@ -37,5 +37,37 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="find_member_name">이름으로 찾기</string>
-
+    <string name="phone">전화번호</string>
+    <string name="email">이메일</string>
+    <string name="homepage">홈페이지</string>
+    <string name="job_title">직책명</string>
+    <string name="birth_date">생년월일</string>
+    <string name="elec_local">선거구</string>
+    <string name="elec_div">선거구구분</string>
+    <string name="unit">당선</string>
+    <string name="member_staff">보좌관</string>
+    <string name="member_secretary">비서관</string>
+    <string name="member_assem_address">사무실 호실</string>
+    <string name="member_history">약력</string>
+    <string-array name="location_array">
+        <item></item>
+        <item>강원</item>
+        <item>경기</item>
+        <item>경남</item>
+        <item>경북</item>
+        <item>전남</item>
+        <item>전북</item>
+        <item>충남</item>
+        <item>충북</item>
+        <item>제주</item>
+    </string-array>
+    <string-array name="party_array">
+        <item></item>
+        <item>더불어민주당</item>
+        <item>기본소득당</item>
+        <item>무소속</item>
+        <item>정의당</item>
+        <item>국민의힘</item>
+        <item>시대전환</item>
+    </string-array>
 </resources>

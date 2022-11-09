@@ -12,6 +12,10 @@ import java.io.IOException
 class MemberSearchPagingSource(
     private val api: MemberInfoApi,
     private val numOfRows: Int? = 10,
+    private val pageNo: Int?,
+    private val name: String?,
+    private val partyName: String?,
+    private val origName: String?,
 ) : PagingSource<Int, MemberInfoItem>() {
 
     companion object {
@@ -28,7 +32,13 @@ class MemberSearchPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MemberInfoItem> {
         return try {
             val pageNumber = params.key ?: STARTING_PAGE_INDEX
-            val response = api.searchMember(pSize = params.loadSize, pIndex = params.key)
+            val response = api.searchMember(
+                pSize = params.loadSize,
+                pIndex = pageNo,
+                name = name,
+                origName = origName,
+                partyName = partyName,
+            )
 
             // 마지막 페이지 여부
             val totalCount = response.body()?.head?.listTotalCount

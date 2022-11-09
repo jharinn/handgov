@@ -11,5 +11,8 @@ interface MemberInfoApi {
         @Query("KEY") key: String = Const.MEMBER_INFO_API_KEY,
         @Query("pSize") pSize: Int?,
         @Query("pIndex") pIndex: Int?,
+        @Query("HG_NM") name: String?,
+        @Query("POLY_NM") partyName: String?,
+        @Query("ORIG_NM") origName: String?,
     ): Response<MemberInfoResponse>
 }

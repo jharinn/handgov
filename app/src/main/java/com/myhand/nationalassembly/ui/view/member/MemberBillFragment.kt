@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.myhand.nationalassembly.databinding.FragmentMemberBillBinding
+import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MemberBillFragment : Fragment() {
+class MemberBillFragment(infoItem: MemberInfoItem) : Fragment() {
 
     private var _binding: FragmentMemberBillBinding? = null
     private val binding get() = _binding!!
