@@ -5,53 +5,22 @@ import com.myhand.nationalassembly.data.remote.member.model.info.MemberInfoRow
 import com.myhand.nationalassembly.data.remote.member.model.photo.MemberPhotoItem
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
 
-fun MemberPhotoModel.toItem(): MemberPhotoItem =
-    MemberPhotoItem(
-        deptCd = this.deptCd,
-        empNm = this.empNm,
-        engNm = this.engNm,
-        hjNm = this.hjNm,
-        jpgLink = this.jpgLink,
-        num = this.num,
-        origNm = this.origNm,
-        reeleGbnNm = this.reeleGbnNm,
-    )
-
-fun List<MemberPhotoModel>.toItem(): List<MemberPhotoItem> = map {
-    MemberPhotoItem(
-        deptCd = it.deptCd,
-        empNm = it.empNm,
-        engNm = it.engNm,
-        hjNm = it.hjNm,
-        jpgLink = it.jpgLink,
-        num = it.num,
-        origNm = it.origNm,
-        reeleGbnNm = it.reeleGbnNm,
-    )
-}
-
 fun MemberPhotoItem.toModel(): MemberPhotoModel =
     MemberPhotoModel(
-        deptCd = this.deptCd ?: "",
         empNm = this.empNm ?: "",
-        engNm = this.engNm ?: "",
         hjNm = this.hjNm ?: "",
         jpgLink = this.jpgLink ?: "",
         num = this.num ?: "",
         origNm = this.origNm ?: "",
-        reeleGbnNm = this.reeleGbnNm ?: "",
     )
 
 fun List<MemberPhotoItem>.toModel(): List<MemberPhotoModel> = map {
     MemberPhotoModel(
-        deptCd = it.deptCd ?: "",
         empNm = it.empNm ?: "",
-        engNm = it.engNm ?: "",
         hjNm = it.hjNm ?: "",
         jpgLink = it.jpgLink ?: "",
         num = it.num ?: "",
         origNm = it.origNm ?: "",
-        reeleGbnNm = it.reeleGbnNm ?: "",
     )
 }
 

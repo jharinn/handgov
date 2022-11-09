@@ -65,8 +65,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_member_search"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.GONE}" />
+                android:layout_height="match_parent" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -74,6 +73,7 @@
             android:id="@+id/progress_member"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.GONE}" />
     </FrameLayout>
 </layout>

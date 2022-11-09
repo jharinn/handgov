@@ -15,9 +15,13 @@ interface MemberRepository {
 
     suspend fun fetchMemberPhotoData(): Response<MemberPhotoResponse>
 
-    fun getMemberPhotoCount(): Int
+    fun getDBMemberPhotoCount(): Int
 
-    fun getMemberPhotoDataFromDB(): List<MemberPhotoModel>
+    fun getDBMemberPhotoData(): List<MemberPhotoModel>
+
+    suspend fun savePreferencePhotoCount(mode: Int)
+
+    suspend fun getPreferencePhotoCount(): Flow<Int>
 //    //Room
 //    suspend fun insertBooks(book: Book)
 //

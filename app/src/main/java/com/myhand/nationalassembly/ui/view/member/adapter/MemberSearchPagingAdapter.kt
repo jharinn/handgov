@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.myhand.nationalassembly.databinding.ItemMemberBinding
+import com.myhand.nationalassembly.util.LogUtill
 
 class MemberSearchPagingAdapter :
     PagingDataAdapter<MemberInfoItem, MemberSearchPagingAdapter.MemberSearchViewHolder>(
@@ -20,10 +21,11 @@ class MemberSearchPagingAdapter :
     }
 
     override fun onBindViewHolder(holder: MemberSearchViewHolder, position: Int) {
-        val pageBook = getItem(position)
+        val memberItem = getItem(position)
 
-        pageBook?.let { member ->
+        memberItem?.let { member ->
             holder.bind(member)
+            LogUtill.d("onBindViewHolder:: ${member.photoLink}")
             holder.itemView.setOnClickListener {
                 onItemClickListener?.let { it(member) }
             }

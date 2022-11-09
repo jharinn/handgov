@@ -1,7 +1,5 @@
 package com.myhand.nationalassembly.data.repository
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.paging.PagingData
 import com.myhand.nationalassembly.data.local.member.MemberLocalDataSource
 import com.myhand.nationalassembly.data.local.member.model.MemberPhotoModel
@@ -15,7 +13,6 @@ import javax.inject.Singleton
 
 @Singleton
 class MemberRepositoryImpl @Inject constructor(
-    private val dataStore: DataStore<Preferences>,
     private val localDataSource: MemberLocalDataSource,
     private val remoteDataSource: MemberRemoteDataSource
 ) : MemberRepository {
@@ -32,11 +29,19 @@ class MemberRepositoryImpl @Inject constructor(
         return remoteDataSource.fetchMemberPhotoData()
     }
 
-    override fun getMemberPhotoCount(): Int {
+    override fun getDBMemberPhotoCount(): Int {
         return localDataSource.getMemberPhotoCount()
     }
 
-    override fun getMemberPhotoDataFromDB(): List<MemberPhotoModel> {
+    override fun getDBMemberPhotoData(): List<MemberPhotoModel> {
         return localDataSource.getMemberPhotoList()
+    }
+
+    override suspend fun savePreferencePhotoCount(count: Int) {
+        return localDataSource.savePhotoCount(count)
+    }
+
+    override suspend fun getPreferencePhotoCount(): Flow<Int> {
+        return localDataSource.getPhotoCount()
     }
 }

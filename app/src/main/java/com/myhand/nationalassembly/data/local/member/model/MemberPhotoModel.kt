@@ -9,12 +9,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = Const.DATABASE_MEMBER_PHOTO)
 data class MemberPhotoModel(
-    /** 9771230 */
-    var deptCd: String,
     /** 강기윤 */
     var empNm: String,
-    /** KANG GIYUN */
-    var engNm: String,
     /** 姜起潤 */
     var hjNm: String,
     /** http://www.assembly.go.kr/photo/9771230.jpg */
@@ -24,6 +20,4 @@ data class MemberPhotoModel(
     var num: String,
     /** 경남 창원시성산구 */
     var origNm: String,
-    /** 재선 */
-    var reeleGbnNm: String,
 ) : Parcelable

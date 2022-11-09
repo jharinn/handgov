@@ -61,7 +61,7 @@ class BillSearchFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        memberSearchAdapter = MemberSearchPagingAdapter()
+        //memberSearchAdapter = MemberSearchPagingAdapter()
 
 //        binding.etSearch.text =
 //            Editable.Factory.getInstance().newEditable(searchViewModel.query)
