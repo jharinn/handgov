@@ -2,22 +2,55 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="com.myhand.nationalassembly.ui.view.schedule.viewmodel.ScheduleViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include
-            android:id="@+id/titlesContainer"
-            layout="@layout/calendar_day_titles_container" />
+        android:orientation="vertical"
+        android:weightSum="5">
 
         <com.kizitonwose.calendar.view.CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             app:cv_dayViewResource="@layout/calendar_day_layout"
             app:cv_monthHeaderResource="@layout/calendar_day_titles_container"
             app:cv_scrollPaged="true" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_grey" />
+
+            <TextView
+                android:id="@+id/tv_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/no_search_data"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progress_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.GONE}" />
+        </FrameLayout>
     </LinearLayout>
 </layout>

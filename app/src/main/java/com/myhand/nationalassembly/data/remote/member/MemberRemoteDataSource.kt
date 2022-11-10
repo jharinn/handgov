@@ -3,10 +3,10 @@ package com.myhand.nationalassembly.data.remote.member
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.myhand.nationalassembly.data.remote.member.model.info.MemberInfoApi
-import com.myhand.nationalassembly.data.remote.member.model.info.MemberSearchPagingSource
-import com.myhand.nationalassembly.data.remote.member.model.photo.MemberPhotoApi
-import com.myhand.nationalassembly.data.remote.member.model.photo.MemberPhotoResponse
+import com.myhand.nationalassembly.data.remote.member.info.MemberInfoApi
+import com.myhand.nationalassembly.data.remote.member.info.model.MemberSearchPagingSource
+import com.myhand.nationalassembly.data.remote.member.photo.MemberPhotoApi
+import com.myhand.nationalassembly.data.remote.member.photo.model.MemberPhotoResponse
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
 import com.myhand.nationalassembly.util.Const
 import kotlinx.coroutines.flow.Flow

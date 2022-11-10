@@ -1,9 +1,14 @@
 package com.myhand.nationalassembly.data.local.member.db
 
 import com.myhand.nationalassembly.data.local.member.model.MemberPhotoModel
-import com.myhand.nationalassembly.data.remote.member.model.info.MemberInfoRow
-import com.myhand.nationalassembly.data.remote.member.model.photo.MemberPhotoItem
+import com.myhand.nationalassembly.data.remote.member.info.model.MemberInfoRow
+import com.myhand.nationalassembly.data.remote.member.photo.model.MemberPhotoItem
+import com.myhand.nationalassembly.data.remote.schedule.meeting.model.MeetingScheduleRow
+import com.myhand.nationalassembly.data.remote.schedule.seminar.model.SeminarScheduleRow
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
+import com.myhand.nationalassembly.ui.view.schedule.adapter.MeetingScheduleItem
+import com.myhand.nationalassembly.ui.view.schedule.adapter.ScheduleItem
+import com.myhand.nationalassembly.ui.view.schedule.adapter.SeminarScheduleItem
 
 fun MemberPhotoItem.toModel(): MemberPhotoModel =
     MemberPhotoModel(
@@ -52,7 +57,7 @@ fun List<MemberInfoRow>.toInfoItem(): List<MemberInfoItem> = map {
     )
 }
 
-fun MemberInfoRow.toItem(): MemberInfoItem =
+fun MemberInfoRow.toSeminarItem(): MemberInfoItem =
     MemberInfoItem(
         this.name,
         this.hjName,
@@ -104,3 +109,61 @@ fun MemberInfoItem.toRow(): MemberInfoRow =
         this.memTitle,
         this.assemAddress,
     )
+
+fun SeminarScheduleRow.toSeminarItem(): SeminarScheduleItem =
+    SeminarScheduleItem(
+        this.title,
+        this.link,
+        this.description,
+        this.sDate,
+        this.sTime,
+        this.name,
+        this.location,
+    )
+
+fun List<SeminarScheduleRow>.toSeminarItem(): List<SeminarScheduleItem> = map {
+    SeminarScheduleItem(
+        it.title,
+        it.link,
+        it.description,
+        it.sDate,
+        it.sTime,
+        it.name,
+        it.location,
+    )
+}
+
+@JvmName("toScheduleSeminarScheduleRow")
+fun List<SeminarScheduleRow>.toSchedule(): List<ScheduleItem> = map {
+    ScheduleItem(
+        title = it.title,
+        link = it.link,
+        description = it.description,
+        sDate = it.sDate,
+        sTime = it.sTime,
+        location = it.location
+    )
+}
+
+fun List<MeetingScheduleRow>.toMeetingItem(): List<MeetingScheduleItem> = map {
+    MeetingScheduleItem(
+        it.meetingSession,
+        it.cha,
+        it.title,
+        it.meettingDate,
+        it.meettingTime,
+        it.linkUrl,
+        it.unitCd
+    )
+}
+
+fun List<MeetingScheduleRow>.toSchedule(): List<ScheduleItem> = map {
+    ScheduleItem(
+        title = it.title,
+        link = it.linkUrl,
+        description = it.unitNm + it.meetingSession,
+        sDate = it.meettingDate,
+        sTime = it.meettingTime,
+        location = "본회의",
+    )
+}

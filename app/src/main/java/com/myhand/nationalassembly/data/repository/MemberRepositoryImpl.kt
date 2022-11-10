@@ -4,7 +4,7 @@ import androidx.paging.PagingData
 import com.myhand.nationalassembly.data.local.member.MemberLocalDataSource
 import com.myhand.nationalassembly.data.local.member.model.MemberPhotoModel
 import com.myhand.nationalassembly.data.remote.member.MemberRemoteDataSource
-import com.myhand.nationalassembly.data.remote.member.model.photo.MemberPhotoResponse
+import com.myhand.nationalassembly.data.remote.member.photo.model.MemberPhotoResponse
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response

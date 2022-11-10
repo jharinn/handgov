@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/fragment_main"
         android:name="com.myhand.nationalassembly.ui.view.MainFragment"
-        android:label="MainFragment">
+        android:label="내손안의 국회">
         <action
             android:id="@+id/action_mainFragment_to_memberSearchFragment"
             app:destination="@id/fragment_member" />
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/fragment_member"
         android:name="com.myhand.nationalassembly.ui.view.member.MemberSearchFragment"
-        android:label="MemberSearchFragment">
+        android:label="국회의원 정보">
         <action
             android:id="@+id/action_memberSearchFragment_to_memberDetailFragment"
             app:destination="@id/fragment_member_detail" />
@@ -29,15 +29,15 @@
     <fragment
         android:id="@+id/fragment_bill"
         android:name="com.myhand.nationalassembly.ui.view.bill.BillFragment"
-        android:label="BillFragment" />
+        android:label="보고서/업무추진비" />
     <fragment
         android:id="@+id/fragment_schedule"
         android:name="com.myhand.nationalassembly.ui.view.schedule.ScheduleFragment"
-        android:label="ScheduleFragment" />
+        android:label="의사/행사일정" />
     <fragment
         android:id="@+id/fragment_member_detail"
         android:name="com.myhand.nationalassembly.ui.view.member.MemberDetailFragment"
-        android:label="MemberDetailFragment">
+        android:label="국회의원 정보">
         <argument
             android:name="memberDetailInfo"
             app:argType="com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem" />

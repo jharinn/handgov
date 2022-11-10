@@ -10,14 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myhand.nationalassembly.R
 import com.myhand.nationalassembly.databinding.FragmentMemberSearchBinding
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberSearchPagingAdapter
-import com.myhand.nationalassembly.ui.viewmodel.MemberViewModel
+import com.myhand.nationalassembly.ui.view.member.viewmodel.MemberViewModel
 import com.myhand.nationalassembly.util.Const
-import com.myhand.nationalassembly.util.LogUtill
+import com.myhand.nationalassembly.util.LogUtil
 import com.myhand.nationalassembly.util.collectLatestStateFlow
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -37,6 +38,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
     ): View? {
         _binding = FragmentMemberSearchBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
+        binding.viewmodel = memberVM
 
         return binding.root
     }
@@ -52,7 +54,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
     }
 
     private fun setDefaultSearch() {
-        LogUtill.d("setDefaultSearch")
+        LogUtil.d("setDefaultSearch")
         memberVM.fetchMemberPaging(
             numOfRows = null,
             pageNo = null,
@@ -62,6 +64,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
         )
 
         collectLatestStateFlow(memberVM.fetchMemberResult) {
+            LogUtil.d("collectLatestStateFlow: ${it}")
             memberSearchAdapter.submitData(it)
         }
 
@@ -70,7 +73,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
 
     private fun observeLiveData() {
         memberVM.memberPhotoDBData.observe(viewLifecycleOwner, Observer { photoData ->
-            LogUtill.d("memberVM.memberPhotoDBData.observe photoData.size::${photoData.size}")
+            LogUtil.d("memberVM.memberPhotoDBData.observe photoData.size::${photoData.size}")
 
             if (photoData.size > 0) {
                 setDefaultSearch()
@@ -87,7 +90,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
 
         selectedLocation = binding.spinnerLocation.selectedItem.toString()
         selectedParty = binding.spinnerParty.selectedItem.toString()
-        LogUtill.d("selectedLocation: $selectedLocation")
+        LogUtil.d("selectedLocation: $selectedLocation")
 
         binding.etMemberSearch.text?.let { text ->
             val name = if (text.toString().trim().isEmpty()) "" else text.toString().trim()
@@ -107,6 +110,19 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
 
     private fun setUpRecyclerView() {
         memberSearchAdapter = MemberSearchPagingAdapter()
+
+        memberSearchAdapter.addLoadStateListener { loadState ->
+            memberSearchAdapter.apply {
+                LogUtil.d("loadState:: ${loadState.append}")
+                // TODO
+                if (itemCount <= 0 && loadState.append is LoadState.NotLoading && loadState.append.endOfPaginationReached) {
+                    LogUtil.d("noData - adapter")
+                    binding.tvNoData?.visibility = View.VISIBLE
+                } else {
+                    binding.tvNoData?.visibility = View.GONE
+                }
+            }
+        }
 
         binding.rvMemberSearch.apply {
             setHasFixedSize(true)
@@ -159,7 +175,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
     }
 
     private fun validatePhotoData() {
-        LogUtill.d("isPhotoDataExist = ${isPhotoDatabaseExist(Const.DATABASE_MEMBER_PHOTO)}")
+        LogUtil.d("isPhotoDataExist = ${isPhotoDatabaseExist(Const.DATABASE_MEMBER_PHOTO)}")
 
         // DB이름이 이미 존재하는 경우
         if (isPhotoDatabaseExist(Const.DATABASE_MEMBER_PHOTO))
@@ -171,12 +187,12 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
     }
 
     private fun getPhotoFromDB() {
-        LogUtill.d("getPhotoFromDB")
+        LogUtil.d("getPhotoFromDB")
         memberVM.getDBMemberPhotoData()
     }
 
     private fun fetchPhotoData() {
-        LogUtill.d("fetchPhotoData")
+        LogUtil.d("fetchPhotoData")
         memberVM.fetchMemberPhotoData()
     }
 

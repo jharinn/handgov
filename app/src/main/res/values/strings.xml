@@ -49,6 +49,11 @@
     <string name="member_secretary">비서관</string>
     <string name="member_assem_address">사무실 호실</string>
     <string name="member_history">약력</string>
+    <string name="no_search_data">해당하는 데이터가 없습니다.</string>
+    <string name="date_time">일시</string>
+    <string name="place">장소</string>
+    <string name="title">제목</string>
+    <string name="description">설명</string>
     <string-array name="location_array">
         <item></item>
         <item>강원</item>

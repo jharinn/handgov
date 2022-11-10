@@ -8,10 +8,13 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.myhand.nationalassembly.data.local.member.db.MemberPhotoDatabase
 import com.myhand.nationalassembly.data.remote.bill.BillApi
-import com.myhand.nationalassembly.data.remote.member.model.info.MemberInfoApi
-import com.myhand.nationalassembly.data.remote.member.model.photo.MemberPhotoApi
+import com.myhand.nationalassembly.data.remote.member.info.MemberInfoApi
+import com.myhand.nationalassembly.data.remote.member.photo.MemberPhotoApi
+import com.myhand.nationalassembly.data.remote.schedule.meeting.MeetingScheduleApi
+import com.myhand.nationalassembly.data.remote.schedule.seminar.SeminarScheduleApi
 import com.myhand.nationalassembly.util.Const
 import com.myhand.nationalassembly.util.Const.DATASTORE_NAME
+import com.myhand.nationalassembly.util.LogUtil
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import dagger.Module
@@ -22,6 +25,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -66,11 +70,7 @@ object AppModule {
     @Named("OpenApi")
     fun provideOpenApiXmlRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .addConverterFactory(
-                TikXmlConverterFactory.create(
-                    TikXml.Builder().exceptionOnUnreadXml(false).build()
-                )
-            )
+            .addConverterFactory(SimpleXmlConverterFactory.create())
             .client(okHttpClient)
             .baseUrl(Const.OPEN_API_BASE_URL)
             .build()
@@ -85,6 +85,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideMemberInfoApiService(@Named("OpenApi") retrofit: Retrofit): MemberInfoApi {
+        LogUtil.d("provideMemberInfoApiService")
+
         return retrofit.create(MemberInfoApi::class.java)
     }
 
@@ -92,6 +94,20 @@ object AppModule {
     @Provides
     fun provideBillApiService(@Named("PublicDataSecretariat") retrofit: Retrofit): BillApi {
         return retrofit.create(BillApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSeminarScheduleApiService(@Named("OpenApi") retrofit: Retrofit): SeminarScheduleApi {
+        LogUtil.d("provideSeminarScheduleApiService")
+
+        return retrofit.create(SeminarScheduleApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMeetingScheduleApiService(@Named("OpenApi") retrofit: Retrofit): MeetingScheduleApi {
+        return retrofit.create(MeetingScheduleApi::class.java)
     }
 
     //Room
