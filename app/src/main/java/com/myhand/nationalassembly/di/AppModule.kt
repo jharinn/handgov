@@ -10,6 +10,10 @@ import com.myhand.nationalassembly.data.local.member.db.MemberPhotoDatabase
 import com.myhand.nationalassembly.data.remote.bill.BillApi
 import com.myhand.nationalassembly.data.remote.member.info.MemberInfoApi
 import com.myhand.nationalassembly.data.remote.member.photo.MemberPhotoApi
+import com.myhand.nationalassembly.data.remote.report.library.LibraryReportApi
+import com.myhand.nationalassembly.data.remote.report.nars.model.global.NarsGlobalReportApi
+import com.myhand.nationalassembly.data.remote.report.nars.model.issue.NarsIssueReportApi
+import com.myhand.nationalassembly.data.remote.report.nars.model.policyresearch.NarsPolicyReportApi
 import com.myhand.nationalassembly.data.remote.schedule.meeting.MeetingScheduleApi
 import com.myhand.nationalassembly.data.remote.schedule.seminar.SeminarScheduleApi
 import com.myhand.nationalassembly.util.Const
@@ -85,8 +89,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideMemberInfoApiService(@Named("OpenApi") retrofit: Retrofit): MemberInfoApi {
-        LogUtil.d("provideMemberInfoApiService")
-
         return retrofit.create(MemberInfoApi::class.java)
     }
 
@@ -109,6 +111,31 @@ object AppModule {
     fun provideMeetingScheduleApiService(@Named("OpenApi") retrofit: Retrofit): MeetingScheduleApi {
         return retrofit.create(MeetingScheduleApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideLibraryReportApiService(@Named("OpenApi") retrofit: Retrofit): LibraryReportApi {
+        return retrofit.create(LibraryReportApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideIssueReportApiService(@Named("OpenApi") retrofit: Retrofit): NarsIssueReportApi {
+        return retrofit.create(NarsIssueReportApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGlobalReportApiService(@Named("OpenApi") retrofit: Retrofit): NarsGlobalReportApi {
+        return retrofit.create(NarsGlobalReportApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providePolicyReportApiService(@Named("OpenApi") retrofit: Retrofit): NarsPolicyReportApi {
+        return retrofit.create(NarsPolicyReportApi::class.java)
+    }
+
 
     //Room
     @Singleton

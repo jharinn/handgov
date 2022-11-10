@@ -7,5 +7,5 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml(name = "Items")
 data class BillItems(
     @Element(name = "item")
-    val item: List<BillItem>
+    val item: List<BillItem>? = listOf()
 )

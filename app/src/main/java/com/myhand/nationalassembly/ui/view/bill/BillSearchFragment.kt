@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myhand.nationalassembly.databinding.FragmentMemberSearchBinding
-import com.myhand.nationalassembly.ui.view.member.adapter.MemberSearchPagingAdapter
+import com.myhand.nationalassembly.ui.view.report.adapter.ReportPagingAdapter
 import com.myhand.nationalassembly.util.Const
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +19,7 @@ class BillSearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     //    private val memberViewModel by viewModels<MemberViewModel>()
-    private lateinit var memberSearchAdapter: MemberSearchPagingAdapter
+    private lateinit var memberSearchAdapter: ReportPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

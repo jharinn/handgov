@@ -1,7 +1,6 @@
 package com.myhand.nationalassembly.util
 
 import com.myhand.nationalassembly.BuildConfig
-import com.myhand.nationalassembly.util.Const.OPEN_API_KEY
 
 object Const {
     val NA_Secretariat_API_BASE_URL = "http://apis.data.go.kr/9710000/"
@@ -13,4 +12,5 @@ object Const {
     const val PAGING_SIZE = 10
     const val DATASTORE_NAME = "MyHandNA"
     const val DATABASE_MEMBER_PHOTO = "member_photo"
+    const val DEFAULT_URL = "https://www.assembly.go.kr/portal/main/main.do"
 }

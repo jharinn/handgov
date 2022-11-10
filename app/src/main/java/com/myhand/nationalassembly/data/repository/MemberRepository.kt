@@ -2,6 +2,7 @@ package com.myhand.nationalassembly.data.repository
 
 import androidx.paging.PagingData
 import com.myhand.nationalassembly.data.local.member.model.MemberPhotoModel
+import com.myhand.nationalassembly.data.remote.bill.model.BillResponse
 import com.myhand.nationalassembly.data.remote.member.photo.model.MemberPhotoResponse
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
 import kotlinx.coroutines.flow.Flow
@@ -20,6 +21,11 @@ interface MemberRepository {
     suspend fun insertAllMemberPhoto(vararg item: MemberPhotoModel)
 
     suspend fun fetchMemberPhotoData(): Response<MemberPhotoResponse>
+
+    suspend fun fetchMemberBill(
+        mName: String?,
+        mhjName: String?
+    ): Response<BillResponse>
 
     fun getDBMemberPhotoCount(): Int
 

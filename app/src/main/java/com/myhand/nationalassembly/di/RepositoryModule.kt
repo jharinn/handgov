@@ -1,9 +1,6 @@
 package com.myhand.nationalassembly.di
 
-import com.myhand.nationalassembly.data.repository.MemberRepository
-import com.myhand.nationalassembly.data.repository.MemberRepositoryImpl
-import com.myhand.nationalassembly.data.repository.ScheduleRepository
-import com.myhand.nationalassembly.data.repository.ScheduleRepositoryImpl
+import com.myhand.nationalassembly.data.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,5 +22,11 @@ abstract class RepositoryModule {
     abstract fun bindScheduleRepository(
         scheduleRepositoryImpl: ScheduleRepositoryImpl
     ): ScheduleRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindReportRepository(
+        reportRepositoryImpl: ReportRepositoryImpl
+    ): ReportRepository
 
 }

@@ -3,9 +3,12 @@ package com.myhand.nationalassembly.data.local.member.db
 import com.myhand.nationalassembly.data.local.member.model.MemberPhotoModel
 import com.myhand.nationalassembly.data.remote.member.info.model.MemberInfoRow
 import com.myhand.nationalassembly.data.remote.member.photo.model.MemberPhotoItem
+import com.myhand.nationalassembly.data.remote.report.library.model.LibraryReportRow
+import com.myhand.nationalassembly.data.remote.report.nars.model.base.NarsReportRow
 import com.myhand.nationalassembly.data.remote.schedule.meeting.model.MeetingScheduleRow
 import com.myhand.nationalassembly.data.remote.schedule.seminar.model.SeminarScheduleRow
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
+import com.myhand.nationalassembly.ui.view.report.adapter.ReportItem
 import com.myhand.nationalassembly.ui.view.schedule.adapter.MeetingScheduleItem
 import com.myhand.nationalassembly.ui.view.schedule.adapter.ScheduleItem
 import com.myhand.nationalassembly.ui.view.schedule.adapter.SeminarScheduleItem
@@ -165,5 +168,22 @@ fun List<MeetingScheduleRow>.toSchedule(): List<ScheduleItem> = map {
         sDate = it.meettingDate,
         sTime = it.meettingTime,
         location = "본회의",
+    )
+}
+
+fun List<NarsReportRow>.toItem(): List<ReportItem> = map {
+    ReportItem(
+        title = it.bookNm,
+        link = it.viewerUrl,
+        regDate = it.insertDt,
+    )
+}
+
+@JvmName("toItemLibraryReportRow")
+fun List<LibraryReportRow>.toItem(): List<ReportItem> = map {
+    ReportItem(
+        title = it.title,
+        link = it.sysattach1,
+        regDate = it.regDate,
     )
 }

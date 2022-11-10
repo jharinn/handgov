@@ -11,31 +11,7 @@ import javax.inject.Singleton
 class ScheduleRepositoryImpl @Inject constructor(
     private val remoteDataSource: ScheduleRemoteDataSource
 ) : ScheduleRepository {
-    //    override fun fetchSeminarSchedule(
-//        numOfRows: Int?,
-//        pageNo: Int?,
-//        sDate: String?
-//    ): Flow<PagingData<ScheduleItem>> {
-//        LogUtil.d("ScheduleRepositoryImpl !!")
-//
-//        return remoteDataSource.fetchSeminarSchedule(
-//            numOfRows,
-//            pageNo,
-//            sDate,
-//        )
-//    }
-//
-//    override fun fetchMeetingSchedule(
-//        numOfRows: Int?,
-//        pageNo: Int?,
-//        mDate: String?
-//    ): Flow<PagingData<ScheduleItem>> {
-//        return remoteDataSource.fetchMeetingSchedule(
-//            numOfRows,
-//            pageNo,
-//            mDate,
-//        )
-//    }
+
     override suspend fun fetchSeminarSchedule(
         numOfRows: Int?,
         pageNo: Int?,

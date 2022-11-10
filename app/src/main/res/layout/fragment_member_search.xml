@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.view.member.MemberSearchFragment">
+    tools:context=".ui.view.report.ReportFragment">
 
     <data>
 
@@ -50,7 +50,7 @@
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:paddingEnd="10dp"
-                    android:src="@drawable/ic_baseline_search_24"
+                    android:src="@drawable/ic_round_search"
                     app:tint="@color/deep_grey" />
 
             </RelativeLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/myhand_nav_graph"
     app:startDestination="@id/fragment_main">
 
@@ -17,6 +18,9 @@
         <action
             android:id="@+id/action_mainFragment_to_scheduleFragment"
             app:destination="@id/fragment_schedule" />
+        <action
+            android:id="@+id/action_fragment_main_to_reportBudgetFragment"
+            app:destination="@id/reportBudgetFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_member"
@@ -29,11 +33,19 @@
     <fragment
         android:id="@+id/fragment_bill"
         android:name="com.myhand.nationalassembly.ui.view.bill.BillFragment"
-        android:label="보고서/업무추진비" />
+        android:label="보고서/업무추진비">
+        <action
+            android:id="@+id/action_fragment_bill_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_schedule"
         android:name="com.myhand.nationalassembly.ui.view.schedule.ScheduleFragment"
-        android:label="의사/행사일정" />
+        android:label="의사/행사일정">
+        <action
+            android:id="@+id/action_fragment_schedule_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_member_detail"
         android:name="com.myhand.nationalassembly.ui.view.member.MemberDetailFragment"
@@ -41,5 +53,24 @@
         <argument
             android:name="memberDetailInfo"
             app:argType="com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem" />
+        <action
+            android:id="@+id/action_fragment_member_detail_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportBudgetFragment"
+        android:name="com.myhand.nationalassembly.ui.view.report.ReportBudgetFragment"
+        android:label="fragment_report_budget"
+        tools:layout="@layout/fragment_report_budget">
+        <action
+            android:id="@+id/action_reportBudgetFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.myhand.nationalassembly.ui.view.base.WebViewFragment">
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

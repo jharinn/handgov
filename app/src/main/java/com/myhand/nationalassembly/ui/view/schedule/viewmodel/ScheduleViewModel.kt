@@ -20,23 +20,6 @@ import javax.inject.Inject
 class ScheduleViewModel @Inject constructor(
     private val scheduleRepository: ScheduleRepository
 ) : ViewModel() {
-
-//    private val _fetchSeminarResult =
-//        MutableStateFlow<PagingData<ScheduleItem>>(PagingData.empty())
-//    val fetchSeminarResult: StateFlow<PagingData<ScheduleItem>> =
-//        _fetchSeminarResult.asStateFlow()
-//
-//    private val _fetchMeetingResult =
-//        MutableStateFlow<PagingData<ScheduleItem>>(PagingData.empty())
-//    val fetchMeetingResult: StateFlow<PagingData<ScheduleItem>> =
-//        _fetchMeetingResult.asStateFlow()
-//
-//    private val _fetchScheduleResult =
-//        MutableStateFlow<PagingData<ScheduleItem>>(PagingData.empty())
-//    val fetchScheduleResult: StateFlow<PagingData<ScheduleItem>> =
-//        _fetchScheduleResult.asStateFlow()
-
-
     private val _fetchSeminarResult = MutableLiveData<SeminarScheduleResponse>()
     val fetchSeminarResult: LiveData<SeminarScheduleResponse> get() = _fetchSeminarResult
 

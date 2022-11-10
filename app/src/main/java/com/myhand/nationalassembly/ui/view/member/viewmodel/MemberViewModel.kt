@@ -9,6 +9,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.myhand.nationalassembly.data.local.member.db.toModel
 import com.myhand.nationalassembly.data.local.member.model.MemberPhotoModel
+import com.myhand.nationalassembly.data.remote.bill.model.BillItem
 import com.myhand.nationalassembly.data.repository.MemberRepository
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
 import com.myhand.nationalassembly.util.LogUtil
@@ -35,6 +36,11 @@ class MemberViewModel @Inject constructor(
 
     // 국회의원 DB count
     var memberDBCount: MutableLiveData<Int> = MutableLiveData<Int>()
+
+    // 국회의원 발의법안
+    val _fetchMemberBillResult = MutableLiveData<List<BillItem>>()
+    val fetchMemberBillResult: LiveData<List<BillItem>> get() = _fetchMemberBillResult
+
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
@@ -152,6 +158,17 @@ class MemberViewModel @Inject constructor(
             LogUtil.e("member photo data error")
             LogUtil.d("fetchMemberPhotoData :: hideLoading")
             hideLoading()
+        }
+    }
+
+    fun fetchMemberBill(name: String, hjName: String) = viewModelScope.launch(Dispatchers.IO) {
+        val response = memberRepository.fetchMemberBill(
+            name, hjName
+        )
+        if (response.isSuccessful) {
+            response.body()?.let { body ->
+                _fetchMemberBillResult.postValue(body.body.items.item ?: listOf())
+            }
         }
     }
 

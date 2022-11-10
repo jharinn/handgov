@@ -45,6 +45,14 @@ class MainFragment : Fragment(), View.OnClickListener {
                 val action = MainFragmentDirections.actionMainFragmentToScheduleFragment()
                 findNavController().navigate(action)
             }
+            R.id.btn_bill -> {
+                val action = MainFragmentDirections.actionMainFragmentToBillFragment()
+                findNavController().navigate(action)
+            }
+            R.id.btn_report -> {
+                val action = MainFragmentDirections.actionFragmentMainToReportBudgetFragment()
+                findNavController().navigate(action)
+            }
         }
     }
 

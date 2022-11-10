@@ -1,41 +1,39 @@
-package com.myhand.nationalassembly.data.remote.schedule.meeting.model
+package com.myhand.nationalassembly.data.remote.report.nars.model.issue
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.myhand.nationalassembly.data.local.member.db.toSchedule
+import com.myhand.nationalassembly.data.local.member.db.toItem
 import com.myhand.nationalassembly.data.remote.base.ResultCodeOpenApi
-import com.myhand.nationalassembly.data.remote.schedule.meeting.MeetingScheduleApi
-import com.myhand.nationalassembly.ui.view.schedule.adapter.ScheduleItem
+import com.myhand.nationalassembly.ui.view.report.adapter.ReportItem
 import com.myhand.nationalassembly.util.Const.PAGING_SIZE
 import com.myhand.nationalassembly.util.LogUtil
 import retrofit2.HttpException
 import java.io.IOException
 
-class MeetingSchedulePagingSource(
-    private val api: MeetingScheduleApi,
+class IssueReportPagingSource(
+    private val api: NarsIssueReportApi,
     private val numOfRows: Int? = 10,
     private val pageNo: Int?,
-    private val meetingDate: String?,
-) : PagingSource<Int, ScheduleItem>() {
+) : PagingSource<Int, ReportItem>() {
 
     companion object {
         const val STARTING_PAGE_INDEX = 1
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ScheduleItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ReportItem>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ScheduleItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ReportItem> {
         return try {
             val pageNumber = params.key ?: STARTING_PAGE_INDEX
-            val response = api.fetchMeetingSchedule(
+
+            val response = api.fetchIssueReport(
                 pSize = params.loadSize,
-                pIndex = pageNo,
-                meetingDate = meetingDate,
+                pIndex = pageNumber,
             )
 
             // 마지막 페이지 여부
@@ -50,14 +48,13 @@ class MeetingSchedulePagingSource(
             } else {
                 pageNumber + (params.loadSize / PAGING_SIZE)
             }
-            LogUtil.d(" response.body()?.code ${response.body()}")
 
             // 데이터 없는 경우
             if (response.body()?.code == ResultCodeOpenApi.INFO_200.resultCode) {
                 LogUtil.d("데이터 없음: response.body()?.code ${response.body()?.code}")
 
                 LoadResult.Page(
-                    data = listOf<ScheduleItem>(),
+                    data = listOf<ReportItem>(),
                     prevKey = prevKey,
                     nextKey = nextKey
                 )
@@ -68,7 +65,7 @@ class MeetingSchedulePagingSource(
                     throw IOException()
                 }
 
-                val data = response.body()?.row!!.toSchedule()
+                val data = response.body()?.row?.toItem()!!
 
                 LoadResult.Page(
                     data = data,

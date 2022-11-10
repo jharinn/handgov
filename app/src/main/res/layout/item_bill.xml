@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/main_screen_padding">
+
+        <TableRow style="@style/BillTableRow">
+
+            <TextView
+                style="@style/BillTableTextTitle"
+                android:text="@string/bill_title" />
+
+            <TextView
+                android:id="@+id/tv_bill_title"
+                style="@style/BillTableTextContent"
+                android:text="@string/bill_title" />
+        </TableRow>
+
+        <TableRow style="@style/BillTableRow">
+
+            <TextView
+                style="@style/BillTableTextTitle"
+                android:text="@string/date_proposed" />
+
+            <TextView
+                android:id="@+id/tv_date_proposed"
+                style="@style/BillTableTextContent"
+                android:text="@string/date_proposed" />
+        </TableRow>
+
+        <TableRow android:paddingHorizontal="@dimen/table_padding">
+
+            <TextView
+                style="@style/BillTableTextTitle"
+                android:text="@string/meeting_result" />
+
+            <TextView
+                android:id="@+id/tv_meeting_result"
+                style="@style/BillTableTextContent"
+                android:text="@string/meeting_result" />
+        </TableRow>
+
+        <TableRow style="@style/BillTableRow">
+
+            <TextView
+                style="@style/BillTableTextTitle"
+                android:text="@string/proc_div" />
+
+            <TextView
+                android:id="@+id/tv_proc_div"
+                style="@style/BillTableTextContent"
+
+                android:text="@string/proc_div" />
+        </TableRow>
+
+        <TableRow style="@style/BillTableRow">
+
+            <TextView
+                style="@style/BillTableTextTitle"
+                android:text="@string/major_content" />
+        </TableRow>
+
+        <TableRow style="@style/BillTableRow">
+
+            <TextView
+                android:id="@+id/tv_major_content"
+                style="@style/BillTableTextContentFull"
+                android:text="@string/major_content" />
+        </TableRow>
+
+
+    </TableLayout>
+</layout>

@@ -3,6 +3,8 @@ package com.myhand.nationalassembly.data.remote.member
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.myhand.nationalassembly.data.remote.bill.BillApi
+import com.myhand.nationalassembly.data.remote.bill.model.BillResponse
 import com.myhand.nationalassembly.data.remote.member.info.MemberInfoApi
 import com.myhand.nationalassembly.data.remote.member.info.model.MemberSearchPagingSource
 import com.myhand.nationalassembly.data.remote.member.photo.MemberPhotoApi
@@ -17,7 +19,8 @@ import javax.inject.Singleton
 @Singleton
 class MemberRemoteDataSource @Inject constructor(
     private val memberInfoApi: MemberInfoApi,
-    private val memberPhotoApi: MemberPhotoApi
+    private val memberPhotoApi: MemberPhotoApi,
+    private val memberBillApi: BillApi
 ) {
     fun searchMemberPaging(
         numOfRows: Int? = 10,
@@ -49,4 +52,10 @@ class MemberRemoteDataSource @Inject constructor(
 
     suspend fun fetchMemberPhotoData(): Response<MemberPhotoResponse> =
         memberPhotoApi.getAllMemberPhoto()
+
+    suspend fun fetchMemberBill(
+        mName: String?,
+        mhjName: String?
+    ): Response<BillResponse> =
+        memberBillApi.searchBill(memName = mName, hjName = mhjName)
 }

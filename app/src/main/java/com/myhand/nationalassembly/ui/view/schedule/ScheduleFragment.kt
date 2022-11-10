@@ -17,7 +17,6 @@ import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.myhand.nationalassembly.databinding.FragmentScheduleBinding
 import com.myhand.nationalassembly.ui.view.schedule.adapter.ScheduleAdapter
-import com.myhand.nationalassembly.ui.view.schedule.adapter.SchedulePagingAdapter
 import com.myhand.nationalassembly.ui.view.schedule.container.DayViewContainer
 import com.myhand.nationalassembly.ui.view.schedule.container.MonthViewContainer
 import com.myhand.nationalassembly.ui.view.schedule.viewmodel.ScheduleViewModel
@@ -35,7 +34,6 @@ class ScheduleFragment : Fragment() {
     private var _binding: FragmentScheduleBinding? = null
     private val binding get() = _binding!!
     private val vm by viewModels<ScheduleViewModel>()
-    private lateinit var schedulePagingAdapter: SchedulePagingAdapter
 
     private lateinit var scheduleAdapter: ScheduleAdapter
     var prevSelectedDate: DayViewContainer? = null
@@ -56,11 +54,6 @@ class ScheduleFragment : Fragment() {
         setCalendar()
         setUpRecyclerView()
 
-//        collectLatestStateFlow(vm.fetchScheduleResult) {
-//            LogUtil.d("collectLatestStateFlow: ${it}")
-//            schedulePagingAdapter.submitData(it)
-//            vm.hideLoading()
-//        }
         fetchTodayList()
         vm._fetchScheduleResult.observe(viewLifecycleOwner) { result ->
             LogUtil.d("result: $result")
@@ -84,7 +77,6 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        //schedulePagingAdapter = SchedulePagingAdapter()
         scheduleAdapter = ScheduleAdapter()
 
         binding.rvSchedule.apply {
@@ -103,11 +95,6 @@ class ScheduleFragment : Fragment() {
         scheduleAdapter.setOnItemClickListener {
 
         }
-//        schedulePagingAdapter.setOnItemClickListener {
-//            val action =
-//                MemberSearchFragmentDirections.actionMemberSearchFragmentToMemberDetailFragment(it)
-//            findNavController().navigate(action)
-//        }
     }
 
     fun setCalendar() {

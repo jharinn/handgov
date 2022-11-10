@@ -3,7 +3,7 @@
     <string name="main_fragment">Hello main fragment</string>
 
     <!--역대 국회의원-->
-    <string name="history_members">역대\n국회의원</string>
+    <string name="members_info">국회의원\n정보</string>
     <string name="location">지역</string>
     <string name="party">소속정당</string>
     <string name="member_name">이름</string>
@@ -12,7 +12,7 @@
 
     <string name="member_bill">발의법안</string>
     <string name="bill_activity">의정활동</string>
-    <string name="schedule">의사행사일정</string>
+    <string name="schedule">의사/행사\n일정</string>
     <string name="report_budget">보고서/업무추진비</string>
     <string name="recent_bill">최근접수의안</string>
     <string name="proc_bill">처리의안</string>
@@ -54,6 +54,14 @@
     <string name="place">장소</string>
     <string name="title">제목</string>
     <string name="description">설명</string>
+    <string name="proc_div">처리구분</string>
+    <string name="major_content">주요내용</string>
+    <string name="meeting_result">의결결과</string>
+    <string name="date_proposed">제안일자</string>
+    <string name="bill_title">의안명</string>
+    <string name="report_title">자료명</string>
+    <string name="reg_date">등록일자</string>
+
     <string-array name="location_array">
         <item></item>
         <item>강원</item>

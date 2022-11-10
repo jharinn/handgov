@@ -13,7 +13,7 @@
         <Button
             android:id="@+id/btn_member"
             style="@style/MainButtons"
-            android:text="@string/history_members"
+            android:text="@string/members_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

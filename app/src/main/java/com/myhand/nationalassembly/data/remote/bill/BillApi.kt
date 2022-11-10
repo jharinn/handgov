@@ -12,7 +12,16 @@ interface BillApi {
         @Query("ServiceKey") serviceKey: String = Const.BILL_API_KEY,
         @Query("numOfRows") numOfRows: Int? = null,
         @Query("pageNo") pageNo: Int? = null,
+        /**
+         * 발의자
+         * 국회의원 성명
+         */
         @Query("mem_name") memName: String? = null,
+        /**
+         * 발의자 한자이름
+         * 동명이인 구분용
+         */
+        @Query("hj_nm") hjName: String? = null,
         @Query("start_ord") startOrd: String? = null, //시작대수
         @Query("end_ord") endOrd: String? = null, //마지막대수
         /**

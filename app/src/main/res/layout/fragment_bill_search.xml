@@ -16,7 +16,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/white"
-            android:drawableEnd="@drawable/ic_baseline_search_24"
+            android:drawableEnd="@drawable/ic_round_search"
             android:padding="10dp" />
 
         <LinearLayout
