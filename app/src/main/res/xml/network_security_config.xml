@@ -8,5 +8,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">apis.data.go.kr</domain>
         <domain includeSubdomains="true">www.assembly.go.kr</domain>
+        <domain includeSubdomains="true">blog.naver.com</domain>
     </domain-config>
 </network-security-config>

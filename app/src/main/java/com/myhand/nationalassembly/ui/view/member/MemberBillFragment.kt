@@ -60,9 +60,11 @@ class MemberBillFragment(val infoItem: MemberInfoItem) : Fragment() {
                 )
             )
         }
-        //TODO webview
 //        memberBillAdapter.setOnItemClickListener {
-//
+//            val billId = it.billId.toString()
+//            val action =
+//                MemberDetailGraphDirections.actionGlobalBillSearchFragment(billId)
+//            findNavController().navigate(action)
 //        }
     }
 

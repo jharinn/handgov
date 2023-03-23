@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="main_screen_padding">30dp</dimen>
-    <dimen name="main_btn_size">150dp</dimen>
+    <dimen name="main_btn_size">140dp</dimen>
     <dimen name="main_btn_text_size">20sp</dimen>
     <dimen name="main_btn_padding">20dp</dimen>
     <dimen name="table_padding">10dp</dimen>
     <dimen name="table_content_margin">10dp</dimen>
+    <dimen name="card_item_padding">20dp</dimen>
+    <dimen name="card_item_margin">3dp</dimen>
+    <dimen name="card_text_header1_size">18sp</dimen>
+    <dimen name="card_text_header2_size">16sp</dimen>
+    <dimen name="card_text_header3_size">14sp</dimen>
+    <dimen name="card_text_header4_size">12sp</dimen>
+    <dimen name="rv_report_size">110dp</dimen>
 </resources>

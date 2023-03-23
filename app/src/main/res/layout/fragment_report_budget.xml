@@ -13,6 +13,7 @@
             android:id="@+id/tab_rb"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:visibility="gone"
             app:tabGravity="fill"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/black"
@@ -22,7 +23,8 @@
             android:id="@+id/vp_rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/deep_grey">
+            android:background="@color/deep_grey"
+            app:userInputEnabled="@{false}">
 
         </androidx.viewpager2.widget.ViewPager2>
     </LinearLayout>

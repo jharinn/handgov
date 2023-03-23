@@ -3,7 +3,7 @@ package com.myhand.nationalassembly.data.repository
 import androidx.paging.PagingData
 import com.myhand.nationalassembly.data.local.member.MemberLocalDataSource
 import com.myhand.nationalassembly.data.local.member.model.MemberPhotoModel
-import com.myhand.nationalassembly.data.remote.bill.model.BillResponse
+import com.myhand.nationalassembly.data.remote.bill.publicapi.model.BillResponse
 import com.myhand.nationalassembly.data.remote.member.MemberRemoteDataSource
 import com.myhand.nationalassembly.data.remote.member.photo.model.MemberPhotoResponse
 import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
@@ -44,11 +44,17 @@ class MemberRepositoryImpl @Inject constructor(
 
     override suspend fun fetchMemberBill(
         mName: String?,
-        mhjName: String?
+        mhjName: String?,
+        memNameCheck: String?,
+        startOrd: Int?,
+        endOrd: Int?
     ): Response<BillResponse> {
         return remoteDataSource.fetchMemberBill(
             mName,
-            mhjName
+            mhjName,
+            memNameCheck,
+            startOrd,
+            endOrd
         )
     }
 

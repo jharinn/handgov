@@ -7,7 +7,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.myhand.nationalassembly.data.local.member.db.MemberPhotoDatabase
-import com.myhand.nationalassembly.data.remote.bill.BillApi
+import com.myhand.nationalassembly.data.remote.bill.openapi.BillLinkApi
+import com.myhand.nationalassembly.data.remote.bill.publicapi.BillApi
 import com.myhand.nationalassembly.data.remote.member.info.MemberInfoApi
 import com.myhand.nationalassembly.data.remote.member.photo.MemberPhotoApi
 import com.myhand.nationalassembly.data.remote.report.library.LibraryReportApi
@@ -18,8 +19,8 @@ import com.myhand.nationalassembly.data.remote.schedule.meeting.MeetingScheduleA
 import com.myhand.nationalassembly.data.remote.schedule.seminar.SeminarScheduleApi
 import com.myhand.nationalassembly.util.Const
 import com.myhand.nationalassembly.util.Const.DATASTORE_NAME
-import com.myhand.nationalassembly.util.LogUtil
 import com.tickaroo.tikxml.TikXml
+import com.tickaroo.tikxml.converter.htmlescape.HtmlEscapeStringConverter
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -61,7 +62,10 @@ object AppModule {
         return Retrofit.Builder()
             .addConverterFactory(
                 TikXmlConverterFactory.create(
-                    TikXml.Builder().exceptionOnUnreadXml(false).build()
+                    TikXml.Builder()
+                        .addTypeConverter(String::class.java, HtmlEscapeStringConverter())
+                        .exceptionOnUnreadXml(false)
+                        .build()
                 )
             )
             .client(okHttpClient)
@@ -100,8 +104,13 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideBillLinkApiService(@Named("OpenApi") retrofit: Retrofit): BillLinkApi {
+        return retrofit.create(BillLinkApi::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideSeminarScheduleApiService(@Named("OpenApi") retrofit: Retrofit): SeminarScheduleApi {
-        LogUtil.d("provideSeminarScheduleApiService")
 
         return retrofit.create(SeminarScheduleApi::class.java)
     }

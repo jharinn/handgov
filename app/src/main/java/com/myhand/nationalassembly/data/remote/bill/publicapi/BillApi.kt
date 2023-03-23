@@ -1,6 +1,6 @@
-package com.myhand.nationalassembly.data.remote.bill
+package com.myhand.nationalassembly.data.remote.bill.publicapi
 
-import com.myhand.nationalassembly.data.remote.bill.model.BillResponse
+import com.myhand.nationalassembly.data.remote.bill.publicapi.model.BillResponse
 import com.myhand.nationalassembly.util.Const
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,6 +12,8 @@ interface BillApi {
         @Query("ServiceKey") serviceKey: String = Const.BILL_API_KEY,
         @Query("numOfRows") numOfRows: Int? = null,
         @Query("pageNo") pageNo: Int? = null,
+        @Query("start_ord") startOrd: Int? = null, //시작대수
+        @Query("end_ord") endOrd: Int? = null, //마지막대수
         /**
          * 발의자
          * 국회의원 성명
@@ -22,8 +24,13 @@ interface BillApi {
          * 동명이인 구분용
          */
         @Query("hj_nm") hjName: String? = null,
-        @Query("start_ord") startOrd: String? = null, //시작대수
-        @Query("end_ord") endOrd: String? = null, //마지막대수
+        /**
+         * 발의자 검색구분
+         * 1.대표발의 G01
+         * 2.1인발의 G02
+         * 3.공동발의 G03
+         */
+        @Query("mem_name_check") memNameCheck: String? = null,
         /**
          * 의안종류
         1.헌법개정 B01

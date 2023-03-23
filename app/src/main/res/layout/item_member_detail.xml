@@ -6,7 +6,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/main_screen_padding">
+        android:layout_margin="@dimen/card_item_margin"
+        android:background="@drawable/bg_round"
+        android:elevation="5dp"
+        android:padding="@dimen/card_item_padding">
 
         <ImageView
             android:id="@+id/iv_member_photo"
@@ -19,6 +22,7 @@
 
         <TextView
             android:id="@+id/tv_name"
+            style="@style/TextViewCardHeader2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -28,6 +32,7 @@
 
         <TextView
             android:id="@+id/tv_party"
+            style="@style/TextViewCardHeader3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/member_party"
@@ -36,6 +41,7 @@
 
         <TextView
             android:id="@+id/tv_local"
+            style="@style/TextViewCardHeader3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/member_local"
@@ -52,21 +58,36 @@
 
             <TextView
                 android:id="@+id/tv_phone"
+                style="@style/TextViewCardHeader3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/phone" />
+                android:drawablePadding="5dp"
+                android:text="@string/phone"
+                android:textColor="@color/today"
+                app:drawableStartCompat="@drawable/ic_round_call_24"
+                app:drawableTint="@color/light_grey" />
 
             <TextView
                 android:id="@+id/tv_email"
+                style="@style/TextViewCardHeader3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email" />
+                android:drawablePadding="5dp"
+                android:text="@string/email"
+                android:textColor="@color/today"
+                app:drawableStartCompat="@drawable/ic_round_email_24"
+                app:drawableTint="@color/light_grey" />
 
             <TextView
                 android:id="@+id/tv_homepage"
+                style="@style/TextViewCardHeader3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/homepage" />
+                android:drawablePadding="5dp"
+                android:text="@string/homepage"
+                android:textColor="@color/today"
+                app:drawableStartCompat="@drawable/ic_round_home_24"
+                app:drawableTint="@color/light_grey" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

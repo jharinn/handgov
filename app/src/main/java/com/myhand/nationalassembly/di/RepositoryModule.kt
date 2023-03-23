@@ -29,4 +29,9 @@ abstract class RepositoryModule {
         reportRepositoryImpl: ReportRepositoryImpl
     ): ReportRepository
 
+    @Singleton
+    @Binds
+    abstract fun bindBillRepository(
+        billRepositoryImpl: BillRepositoryImpl
+    ): BillRepository
 }

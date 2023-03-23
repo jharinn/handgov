@@ -36,9 +36,9 @@ class ReportBudgetFragment : Fragment() {
                 0 -> {
                     tab.text = "보고서"
                 }
-                1 -> {
-                    tab.text = "업무추진비"
-                }
+//                1 -> {
+//                    tab.text = "업무추진비"
+//                }
             }
         }.attach()
 

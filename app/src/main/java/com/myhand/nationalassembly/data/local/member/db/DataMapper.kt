@@ -174,7 +174,7 @@ fun List<MeetingScheduleRow>.toSchedule(): List<ScheduleItem> = map {
 fun List<NarsReportRow>.toItem(): List<ReportItem> = map {
     ReportItem(
         title = it.bookNm,
-        link = it.viewerUrl,
+        link = it.pdffileUrl,
         regDate = it.insertDt,
     )
 }

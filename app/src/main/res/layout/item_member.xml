@@ -6,41 +6,47 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/main_screen_padding">
+        android:layout_marginVertical="@dimen/card_item_margin"
+        android:background="@drawable/bg_round"
+        android:elevation="2dp"
+        android:padding="@dimen/card_item_padding">
 
         <ImageView
             android:id="@+id/iv_member_photo"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
+            android:layout_width="90dp"
+            android:layout_height="130dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/TextViewCardHeader2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:orientation="vertical"
+            android:text="@string/member_name"
             app:layout_constraintStart_toEndOf="@+id/iv_member_photo"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/member_name" />
+        <TextView
+            android:id="@+id/tv_local"
+            style="@style/TextViewCardHeader3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:gravity="bottom"
+            android:text="@string/member_local"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_member_photo" />
 
-            <TextView
-                android:id="@+id/tv_party"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/member_party" />
-
-            <TextView
-                android:id="@+id/tv_local"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/member_local" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        <TextView
+            android:id="@+id/tv_party"
+            style="@style/TextViewCardHeader3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/member_party"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

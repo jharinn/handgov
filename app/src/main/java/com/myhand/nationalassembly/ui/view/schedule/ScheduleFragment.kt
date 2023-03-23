@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kizitonwose.calendar.core.CalendarDay
@@ -20,6 +21,7 @@ import com.myhand.nationalassembly.ui.view.schedule.adapter.ScheduleAdapter
 import com.myhand.nationalassembly.ui.view.schedule.container.DayViewContainer
 import com.myhand.nationalassembly.ui.view.schedule.container.MonthViewContainer
 import com.myhand.nationalassembly.ui.view.schedule.viewmodel.ScheduleViewModel
+import com.myhand.nationalassembly.util.Const
 import com.myhand.nationalassembly.util.LogUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.DayOfWeek
@@ -56,7 +58,6 @@ class ScheduleFragment : Fragment() {
 
         fetchTodayList()
         vm._fetchScheduleResult.observe(viewLifecycleOwner) { result ->
-            LogUtil.d("result: $result")
             scheduleAdapter.submitList(result)
 
             if (result.isEmpty())
@@ -91,9 +92,11 @@ class ScheduleFragment : Fragment() {
                 )
             )
         }
-        //TODO webview
-        scheduleAdapter.setOnItemClickListener {
 
+        scheduleAdapter.setOnItemClickListener {
+            val link = it.link ?: Const.DEFAULT_URL
+            val action = ScheduleFragmentDirections.actionFragmentScheduleToWebViewFragment(link)
+            findNavController().navigate(action)
         }
     }
 
@@ -157,7 +160,7 @@ class ScheduleFragment : Fragment() {
     }
 
     fun YearMonth.displayText(short: Boolean = false): String {
-        return "${this.month.displayText(short = short)} ${this.year}"
+        return "${this.year}년 ${this.month.displayText(short = short)}"
     }
 
     fun Month.displayText(short: Boolean = true): String {

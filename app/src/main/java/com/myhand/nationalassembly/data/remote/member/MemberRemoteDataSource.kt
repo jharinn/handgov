@@ -3,8 +3,8 @@ package com.myhand.nationalassembly.data.remote.member
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.myhand.nationalassembly.data.remote.bill.BillApi
-import com.myhand.nationalassembly.data.remote.bill.model.BillResponse
+import com.myhand.nationalassembly.data.remote.bill.publicapi.BillApi
+import com.myhand.nationalassembly.data.remote.bill.publicapi.model.BillResponse
 import com.myhand.nationalassembly.data.remote.member.info.MemberInfoApi
 import com.myhand.nationalassembly.data.remote.member.info.model.MemberSearchPagingSource
 import com.myhand.nationalassembly.data.remote.member.photo.MemberPhotoApi
@@ -55,7 +55,16 @@ class MemberRemoteDataSource @Inject constructor(
 
     suspend fun fetchMemberBill(
         mName: String?,
-        mhjName: String?
+        mhjName: String?,
+        memNameCheck: String?,
+        startOrd: Int?,
+        endOrd: Int?
     ): Response<BillResponse> =
-        memberBillApi.searchBill(memName = mName, hjName = mhjName)
+        memberBillApi.searchBill(
+            memName = mName,
+            hjName = mhjName,
+            memNameCheck = memNameCheck,
+            startOrd = startOrd,
+            endOrd = endOrd
+        )
 }

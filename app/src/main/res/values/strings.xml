@@ -13,7 +13,7 @@
     <string name="member_bill">발의법안</string>
     <string name="bill_activity">의정활동</string>
     <string name="schedule">의사/행사\n일정</string>
-    <string name="report_budget">보고서/업무추진비</string>
+    <string name="report_budget">보고서</string>
     <string name="recent_bill">최근접수의안</string>
     <string name="proc_bill">처리의안</string>
     <string name="petition_proc_bill">청원처리현황</string>
@@ -61,6 +61,17 @@
     <string name="bill_title">의안명</string>
     <string name="report_title">자료명</string>
     <string name="reg_date">등록일자</string>
+    <string name="nabo_issue_description"><![CDATA[NABO 재정동향 & 이슈는 주요 재정지표, 주요 재정이슈,외국의 재정동향 등 다양한 정보를 제공합니다.]]></string>
+    <string name="nabo_issue_title">NABO 재정동향 이슈</string>
+    <string name="nars_issue_title">국회입법조사처 연구보고서(이슈와 논점)</string>
+    <string name="nars_issue_description">국회입법조사처 정치행정, 경제산업, 사회문화와 관련된 이슈와 논점 연구보고서 정보를 제공합니다.</string>
+    <string name="library_research_title">국회도서관 정책연구용역 보고서</string>
+    <string name="library_research_desc">국회도서관 정책연구용역 보고서 입니다.</string>
+    <string name="find_bill_title">의안명으로 찾기</string>
+    <string name="age">대수</string>
+    <string name="proc_status">처리상태</string>
+    <string name="proposer">제안자</string>
+    <string name="co_proposer">공동발의자</string>
 
     <string-array name="location_array">
         <item></item>
@@ -83,4 +94,21 @@
         <item>국민의힘</item>
         <item>시대전환</item>
     </string-array>
+
+    <string-array name="age">
+        <item>21</item>
+        <item>20</item>
+        <item>19</item>
+    </string-array>
+    <string-array name="proc_result">
+        <item></item>
+        <item>가결</item>
+        <item>부결</item>
+        <item>대안반영폐기</item>
+        <item>폐기</item>
+        <item>임기만료폐기</item>
+        <item>철회</item>
+        <item>계류</item>
+    </string-array>
+
 </resources>

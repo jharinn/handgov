@@ -1,4 +1,4 @@
-package com.myhand.nationalassembly.data.remote.bill.model
+package com.myhand.nationalassembly.data.remote.bill.publicapi.model
 
 import com.myhand.nationalassembly.data.remote.base.Header
 import com.tickaroo.tikxml.annotation.Element

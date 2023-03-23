@@ -49,19 +49,55 @@
     <style name="BillTableTextTitle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">1.2</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="BillTableTextContent">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/table_content_margin</item>
-        <item name="android:layout_weight">4</item>
+        <item name="android:layout_weight">3.8</item>
     </style>
 
     <style name="BillTableTextContentFull">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">5</item>
+    </style>
+
+    <style name="SpinnerLong">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="SpinnerMedium">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="TextViewCardHeader1">
+        <item name="android:textSize">@dimen/card_text_header1_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/dark_grey</item>
+    </style>
+
+    <style name="TextViewCardHeader2">
+        <item name="android:textSize">@dimen/card_text_header2_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/dark_grey</item>
+    </style>
+
+    <style name="TextViewCardHeader3">
+        <item name="android:textSize">@dimen/card_text_header3_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/dark_grey</item>
+    </style>
+
+    <style name="TextViewCardHeader4Normal">
+        <item name="android:textSize">@dimen/card_text_header4_size</item>
+        <item name="color">@color/dark_grey</item>
     </style>
 </resources>

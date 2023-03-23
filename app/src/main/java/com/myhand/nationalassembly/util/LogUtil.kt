@@ -7,7 +7,7 @@ object LogUtil {
     private const val TAG = "LogUtill"
 
     fun d(msg: String) {
-        if (true && !BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             return
         }
 
@@ -15,7 +15,7 @@ object LogUtil {
     }
 
     fun e(msg: String) {
-        if (true && !BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             return
         }
 

@@ -1,4 +1,4 @@
-package com.myhand.nationalassembly.data.remote.bill.model
+package com.myhand.nationalassembly.data.remote.bill.publicapi.model
 
 enum class BillType(val typeName: String, val typeCode: String) {
     B01("헌법개정", "B01"),

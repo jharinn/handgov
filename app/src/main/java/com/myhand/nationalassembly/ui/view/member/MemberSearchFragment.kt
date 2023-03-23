@@ -1,6 +1,7 @@
 package com.myhand.nationalassembly.ui.view.member
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.paging.LoadState
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myhand.nationalassembly.R
 import com.myhand.nationalassembly.databinding.FragmentMemberSearchBinding
@@ -45,10 +44,11 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setSearchBtn()
+        setEditText()
         setSpinner()
-        validatePhotoData()
-        observeLiveData()
         setUpRecyclerView()
+        validatePhotoData()
+        checkMemberPhotoDataExist()
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -64,17 +64,14 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
         )
 
         collectLatestStateFlow(memberVM.fetchMemberResult) {
-            LogUtil.d("collectLatestStateFlow: ${it}")
             memberSearchAdapter.submitData(it)
         }
 
         searchMembers()
     }
 
-    private fun observeLiveData() {
+    private fun checkMemberPhotoDataExist() {
         memberVM.memberPhotoDBData.observe(viewLifecycleOwner, Observer { photoData ->
-            LogUtil.d("memberVM.memberPhotoDBData.observe photoData.size::${photoData.size}")
-
             if (photoData.size > 0) {
                 setDefaultSearch()
             }
@@ -108,34 +105,26 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
         binding.ibSearchBtn.setOnClickListener(this)
     }
 
+    private fun setEditText() {
+        binding.etMemberSearch.setOnKeyListener { view, keyCode, keyevent ->
+            //If the keyevent is a key-down event on the "enter" button
+            if (keyevent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                searchMembers()
+                true
+            } else false
+        }
+    }
+
     private fun setUpRecyclerView() {
         memberSearchAdapter = MemberSearchPagingAdapter()
-
-        memberSearchAdapter.addLoadStateListener { loadState ->
-            memberSearchAdapter.apply {
-                LogUtil.d("loadState:: ${loadState.append}")
-                // TODO
-                if (itemCount <= 0 && loadState.append is LoadState.NotLoading && loadState.append.endOfPaginationReached) {
-                    LogUtil.d("noData - adapter")
-                    binding.tvNoData?.visibility = View.VISIBLE
-                } else {
-                    binding.tvNoData?.visibility = View.GONE
-                }
-            }
-        }
 
         binding.rvMemberSearch.apply {
             setHasFixedSize(true)
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )
             adapter = memberSearchAdapter
         }
+
         memberSearchAdapter.setOnItemClickListener {
             val action =
                 MemberSearchFragmentDirections.actionMemberSearchFragmentToMemberDetailFragment(it)
@@ -149,9 +138,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
             R.array.location_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             binding.spinnerLocation.adapter = adapter
         }
         ArrayAdapter.createFromResource(
@@ -159,9 +146,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
             R.array.party_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             binding.spinnerParty.adapter = adapter
         }
 
@@ -186,6 +171,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
         }
     }
 
+    // TODO:: 정리
     private fun getPhotoFromDB() {
         LogUtil.d("getPhotoFromDB")
         memberVM.getDBMemberPhotoData()
@@ -209,7 +195,7 @@ class MemberSearchFragment : Fragment(), AdapterView.OnItemSelectedListener, Vie
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+        searchMembers()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

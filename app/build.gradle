@@ -1,11 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
     id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.myhand.nationalassembly"
-        minSdk 21
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -80,6 +80,7 @@ dependencies {
     implementation "com.tickaroo.tikxml:retrofit-converter:$tikxml_version"
     implementation "com.tickaroo.tikxml:annotation:$tikxml_version"
     implementation "com.tickaroo.tikxml:core:$tikxml_version"
+    implementation "com.tickaroo.tikxml:converter-htmlescape:$tikxml_version"
     kapt "com.tickaroo.tikxml:processor:$tikxml_version"
 
     // Moshi

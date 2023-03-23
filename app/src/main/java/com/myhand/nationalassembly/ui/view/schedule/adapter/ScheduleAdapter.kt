@@ -36,7 +36,7 @@ class ScheduleAdapter :
         fun bind(memberItem: ScheduleItem) {
             val title = memberItem.title
             val description = memberItem.description
-            val dateTime = memberItem.sDate + memberItem.sTime
+            val dateTime = memberItem.sDate + " " + memberItem.sTime
             val place = memberItem.location
 
             itemView.apply {

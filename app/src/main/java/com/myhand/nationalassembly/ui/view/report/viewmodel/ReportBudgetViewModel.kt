@@ -30,13 +30,13 @@ class ReportBudgetViewModel @Inject constructor(
     val fetchIssueReport: StateFlow<PagingData<ReportItem>> = _fetchIssueReport.asStateFlow()
 
     // NARS 정책연구
-    private val _fetchPolicyReport =
+    val _fetchPolicyReport =
         MutableStateFlow<PagingData<ReportItem>>(PagingData.empty())
     val fetchPolicyReport: StateFlow<PagingData<ReportItem>> = _fetchPolicyReport.asStateFlow()
 
     // NARS 글로벌
-    private val _fetchGlobalReport = MutableLiveData<List<ReportItem>>()
-    val fetchGlobalReport: LiveData<List<ReportItem>> = _fetchGlobalReport
+    private val _fetchGlobalResult = MutableLiveData<List<ReportItem>>()
+    val fetchGlobalResult: LiveData<List<ReportItem>> = _fetchGlobalResult
 
     // 국회도서관 정책연구
     private val _fetchLibraryReport = MutableLiveData<List<ReportItem>>()
@@ -91,7 +91,7 @@ class ReportBudgetViewModel @Inject constructor(
         if (response.isSuccessful) {
             response.body()?.let { body ->
                 val row = body.row ?: listOf()
-                _fetchGlobalReport.postValue(row.toItem())
+                _fetchGlobalResult.postValue(row.toItem())
             }
         }
     }

@@ -46,7 +46,7 @@ class MainFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(action)
             }
             R.id.btn_bill -> {
-                val action = MainFragmentDirections.actionMainFragmentToBillFragment()
+                val action = MainFragmentDirections.actionFragmentMainToBillSearchFragment()
                 findNavController().navigate(action)
             }
             R.id.btn_report -> {

@@ -1,9 +1,9 @@
-package com.myhand.nationalassembly.data.remote.bill
+package com.myhand.nationalassembly.data.remote.bill.publicapi
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.myhand.nationalassembly.data.remote.base.ResultCodePublicData
-import com.myhand.nationalassembly.data.remote.bill.model.BillItem
+import com.myhand.nationalassembly.data.remote.bill.publicapi.model.BillItem
 import com.myhand.nationalassembly.util.Const
 import com.myhand.nationalassembly.util.Const.PAGING_SIZE
 import retrofit2.HttpException

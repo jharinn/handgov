@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.myhand.nationalassembly.data.remote.bill.model.BillItem
+import com.myhand.nationalassembly.data.remote.bill.publicapi.model.BillItem
 import com.myhand.nationalassembly.databinding.ItemBillBinding
 
 class MemberBillAdapter :

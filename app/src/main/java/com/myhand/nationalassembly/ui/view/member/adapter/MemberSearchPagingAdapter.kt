@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.myhand.nationalassembly.databinding.ItemMemberBinding
-import com.myhand.nationalassembly.util.LogUtil
 
 class MemberSearchPagingAdapter :
     PagingDataAdapter<MemberInfoItem, MemberSearchPagingAdapter.MemberSearchViewHolder>(
@@ -25,7 +24,6 @@ class MemberSearchPagingAdapter :
 
         memberItem?.let { member ->
             holder.bind(member)
-            LogUtil.d("onBindViewHolder:: ${member.photoLink}")
             holder.itemView.setOnClickListener {
                 onItemClickListener?.let { it(member) }
             }
@@ -62,7 +60,7 @@ class MemberSearchPagingAdapter :
         fun bind(memberItem: MemberInfoItem) {
             val name = memberItem.name
             val party = memberItem.polyName
-            val local = memberItem.electLocalName
+            val local = memberItem.oriLocalName
 
             itemView.apply {
                 binding.tvName.text = name

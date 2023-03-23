@@ -1,57 +1,64 @@
-package com.myhand.nationalassembly.data.remote.member.info.model
+package com.myhand.nationalassembly.data.remote.bill.openapi
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.myhand.nationalassembly.data.local.member.db.toInfoItem
 import com.myhand.nationalassembly.data.remote.base.ResultCodeOpenApi
-import com.myhand.nationalassembly.data.remote.member.info.MemberInfoApi
-import com.myhand.nationalassembly.ui.view.member.adapter.MemberInfoItem
+import com.myhand.nationalassembly.data.remote.bill.openapi.model.BillLinkRow
+import com.myhand.nationalassembly.data.remote.report.nars.model.policyresearch.NarsPolicyReportPagingSource
+import com.myhand.nationalassembly.util.Const
 import com.myhand.nationalassembly.util.Const.PAGING_SIZE
 import com.myhand.nationalassembly.util.LogUtil
 import retrofit2.HttpException
 import java.io.IOException
 
-class MemberSearchPagingSource(
-    private val api: MemberInfoApi,
-    private val numOfRows: Int? = 10,
-    private val pageNo: Int?,
-    private val name: String?,
-    private val partyName: String?,
-    private val origName: String?,
-) : PagingSource<Int, MemberInfoItem>() {
+class BillLinkSearchPagingSource(
+    private val api: BillLinkApi,
+    private val serviceKey: String = Const.OPEN_API_KEY,
+    private val pSize: Int? = 10,
+    private val pIndex: Int? = 1,
+    private val billId: String?,
+    private val billNo: String?,
+    private val billName: String?,
+    private val committee: String?,
+    private val procResult: String?,
+    private val age: String?,
+    private val proposer: String?,
+) : PagingSource<Int, BillLinkRow>() {
 
     companion object {
         const val STARTING_PAGE_INDEX = 1
     }
 
-    override fun getRefreshKey(state: PagingState<Int, MemberInfoItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, BillLinkRow>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MemberInfoItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BillLinkRow> {
         return try {
             val pageNumber = params.key ?: STARTING_PAGE_INDEX
-            LogUtil.d(" MemberSearchPagingSource before api pageNumber: ${pageNumber}")
-
-            val response = api.searchMember(
+            val response = api.fetchBillLinkResult(
                 pSize = params.loadSize,
-                pIndex = pageNumber,
-                name = name,
-                origName = origName,
-                partyName = partyName,
+                pIndex = params.key,
+                billId = billId,
+                billNo = billNo,
+                billName = billName,
+                committee = committee,
+                procResult = procResult,
+                age = age,
+                proposer = proposer,
             )
 
             // 마지막 페이지 여부
             val totalCount = response.body()?.head?.listTotalCount
             val numOfRows = params.loadSize
             var isLast = numOfRows.times(pageNumber) > (totalCount ?: 10)
-            LogUtil.d(" MemberSearchPagingSource totalCount:$totalCount, numOfRows: $numOfRows, isLast: ${isLast}")
 
             // 다음 키 얻기
-            val prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1
+            val prevKey =
+                if (pageNumber == NarsPolicyReportPagingSource.STARTING_PAGE_INDEX) null else pageNumber - 1
             val nextKey = if (isLast) {
                 null
             } else {
@@ -63,7 +70,7 @@ class MemberSearchPagingSource(
                 LogUtil.d("데이터 없음: response.body()?.code ${response.body()?.code}")
 
                 LoadResult.Page(
-                    data = listOf<MemberInfoItem>(),
+                    data = listOf<BillLinkRow>(),
                     prevKey = prevKey,
                     nextKey = nextKey
                 )
@@ -74,7 +81,8 @@ class MemberSearchPagingSource(
                     throw IOException()
                 }
 
-                val data = response.body()?.row?.toInfoItem()!!
+                val data = response.body()?.row!!
+
                 LoadResult.Page(
                     data = data,
                     prevKey = prevKey,
@@ -87,6 +95,4 @@ class MemberSearchPagingSource(
             LoadResult.Error(exception)
         }
     }
-
-
 }

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/card_item_padding">
+        android:paddingVertical="@dimen/table_content_margin">
 
         <TableRow style="@style/BillTableRow">
 
@@ -44,34 +44,31 @@
                 android:text="@string/meeting_result" />
         </TableRow>
 
+
         <TableRow style="@style/BillTableRow">
 
             <TextView
                 style="@style/BillTableTextTitle"
-                android:text="@string/proc_div" />
+                android:text="@string/proposer" />
 
             <TextView
-                android:id="@+id/tv_proc_div"
+                android:id="@+id/tv_proposer"
                 style="@style/BillTableTextContent"
 
-                android:text="@string/proc_div" />
+                android:text="@string/proposer" />
         </TableRow>
 
         <TableRow style="@style/BillTableRow">
 
             <TextView
                 style="@style/BillTableTextTitle"
-                android:text="@string/major_content" />
-        </TableRow>
-
-        <TableRow style="@style/BillTableRow">
+                android:text="@string/co_proposer" />
 
             <TextView
-                android:id="@+id/tv_major_content"
-                style="@style/BillTableTextContentFull"
-                android:text="@string/major_content" />
+                android:id="@+id/tv_co_proposer"
+                style="@style/BillTableTextContent"
+
+                android:text="@string/co_proposer" />
         </TableRow>
-
-
     </TableLayout>
 </layout>

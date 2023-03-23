@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/myhand_nav_graph"
+    android:label="의정활동"
     app:startDestination="@id/fragment_main">
 
     <fragment
@@ -13,14 +14,14 @@
             android:id="@+id/action_mainFragment_to_memberSearchFragment"
             app:destination="@id/fragment_member" />
         <action
-            android:id="@+id/action_mainFragment_to_billFragment"
-            app:destination="@id/fragment_bill" />
-        <action
             android:id="@+id/action_mainFragment_to_scheduleFragment"
             app:destination="@id/fragment_schedule" />
         <action
             android:id="@+id/action_fragment_main_to_reportBudgetFragment"
             app:destination="@id/reportBudgetFragment" />
+        <action
+            android:id="@+id/action_fragment_main_to_billSearchFragment"
+            app:destination="@id/billSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_member"
@@ -29,14 +30,6 @@
         <action
             android:id="@+id/action_memberSearchFragment_to_memberDetailFragment"
             app:destination="@id/fragment_member_detail" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_bill"
-        android:name="com.myhand.nationalassembly.ui.view.bill.BillFragment"
-        android:label="보고서/업무추진비">
-        <action
-            android:id="@+id/action_fragment_bill_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_schedule"
@@ -60,7 +53,7 @@
     <fragment
         android:id="@+id/reportBudgetFragment"
         android:name="com.myhand.nationalassembly.ui.view.report.ReportBudgetFragment"
-        android:label="fragment_report_budget"
+        android:label="보고서"
         tools:layout="@layout/fragment_report_budget">
         <action
             android:id="@+id/action_reportBudgetFragment_to_webViewFragment"
@@ -71,6 +64,15 @@
         android:name="com.myhand.nationalassembly.ui.view.base.WebViewFragment">
         <argument
             android:name="url"
+            android:defaultValue="https://www.assembly.go.kr/portal/main/main.do"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/billSearchFragment"
+        android:name="com.myhand.nationalassembly.ui.view.bill.BillSearchFragment"
+        android:label="의안검색">
+        <action
+            android:id="@+id/action_billSearchFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
 </navigation>
